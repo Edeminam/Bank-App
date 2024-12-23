@@ -82,7 +82,7 @@ displayMovements(account1.movements);
 containerApp.style.opacity = 1;
 
 const createUsernames = function (accs) {
-  aacs.forEach(function (acc) {
+  accs.forEach(function (acc) {
     acc.username = acc.owner
       .toLowerCase()
       .split(" ")
@@ -92,6 +92,7 @@ const createUsernames = function (accs) {
 };
 
 createUsernames(accounts);
+console.log(accounts);
 /*
 let arr = ["a", "b", "c", "d", "e"];
 
