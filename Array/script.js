@@ -733,6 +733,131 @@ const newMovements = movements.with(1, 2000);
 console.log(newMovements);
 
 console.log(movements);
-*/
 
+
+const movements = account1.movements;
 // ARRAY METHOD PRACTICE
+//1.
+const bankDepositSum = accounts
+  .flatMap((acc) => acc.movements)
+  .filter((mov) => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+//2.
+// const numDeposits1000 = accounts
+//   .flatMap((acc) => acc.movements)
+//   .filter((mov) => mov >= 1000).length;
+// const numDeposits1000 = accounts
+
+const numDeposits1000 = accounts
+  .flatMap((acc) => acc.movements)
+  // .reduce((count, cur) => (cur >= 1000 ? count + 1 : count), 0);
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(numDeposits1000);
+
+// prefixed ++ operator
+let a = 10;
+console.log(++a);
+console.log(a);
+
+//3.
+const { deposits, withdrawals } = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? "deposits" : "withdrawals"] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+
+//4.
+//This is a nice title -> This Is a Nice
+const convertTitleCase = function (title) {
+  const capitalize = (str) => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ["a", "an", "and", "the", "but", "or", "on", "in", "with"];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(" ")
+    .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(" ");
+
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase);
+console.log(convertTitleCase("this is a LONG title but not too long"));
+console.log(convertTitleCase("and here is another title with an EXAMPLE"));
+
+//CODE CHALLENGE
+const dogs = [
+  { weight: 22, curFood: 250, owners: ["Alice", "Bob"] },
+  { weight: 8, curFood: 200, owners: ["Matilda"] },
+  { weight: 13, curFood: 275, owners: ["Sarah", "John", "Leo"] },
+  { weight: 18, curFood: 244, owners: ["Joe"] },
+  { weight: 32, curFood: 340, owners: ["Michael"] },
+];
+
+// 1.
+dogs.forEach((dog) => (dog.recFood = Math.floor(dog.weight ** 0.75 * 28)));
+console.log(dogs);
+
+//2.
+const dogSarah = dogs.find((dog) => dog.owners.includes("Sarah"));
+console.log(
+  `Sarah's dog eats too ${
+    dogSarah.curFood > dogSarah.recFood ? "much" : "little"
+  }`
+);
+
+//3.
+const ownersTooMuch = dogs
+  .filter((dog) => dog.curFood > dog.recFood)
+  .flatMap((dog) => dog.owners);
+const ownersTooLittle = dogs
+  .filter((dog) => dog.curFood < dog.recFood)
+  .flatMap((dog) => dog.owners);
+
+console.log(ownersTooMuch);
+console.log(ownersTooLittle);
+
+//4.
+console.log(`${ownersTooMuch.join(" and ")}'s dogs are eating too much`);
+console.log(`${ownersTooLittle.join(" and ")}'s dogs are eating too little`);
+
+//5.
+console.log(dogs.some((dog) => dog.curFood === dog.recFood));
+
+//5.
+console.log(dogs.some((dog) => dog.curFood === dog.recFood));
+
+// 6.
+const checkEatingOkay = (dog) =>
+  dog.curFood < dog.recFood * 1.1 && dog.curFood > dog.recFood * 0.9;
+
+console.log(dogs.every(checkEatingOkay));
+
+// 7.
+const dogsEatingOkay = dogs.filter(checkEatingOkay);
+console.log(dogsEatingOkay);
+
+// 8.
+const dogsGroupedByPortion = Object.groupBy(dogs, (dog) => {
+  if (dog.curFood > dog.recFood) {
+    return "too-much";
+  } else if (dog.curFood < dog.recFood) {
+    return "too-little";
+  } else {
+    return "exact";
+  }
+});
+console.log(dogsGroupedByPortion);
+*/
