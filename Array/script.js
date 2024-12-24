@@ -619,7 +619,7 @@ const heaviestFetchBreed = Math.max(...fetchWeights);
 
 console.log(fetchWeights);
 console.log(heaviestFetchBreed);
-*/
+
 
 //SORTING ARRAYS
 const movements = account1.movements;
@@ -648,4 +648,9 @@ console.log(movements);
 //   if (a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
+console.log(movements);
+*/
+
+//ARRAY GROUPING
+const movements = account1.movements;
 console.log(movements);
