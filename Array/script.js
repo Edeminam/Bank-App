@@ -860,4 +860,15 @@ const dogsGroupedByPortion = Object.groupBy(dogs, (dog) => {
   }
 });
 console.log(dogsGroupedByPortion);
+
+// 9.
+const dogsGroupedByOwners = Object.groupBy(
+  dogs,
+  dog => `${dog.owners.length}-owners`
+);
+console.log(dogsGroupedByOwners);
+
+// 10.
+const dogsSorted = dogs.toSorted((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
 */
